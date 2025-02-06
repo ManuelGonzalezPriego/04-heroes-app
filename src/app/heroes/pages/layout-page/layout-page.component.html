@@ -1,3 +1,41 @@
-<h1>Hero Layout</h1>
-<router-outlet></router-outlet>
-<h5>Footer</h5>
+<mat-sidenav-container fullscreen>
+  <mat-sidenav #sidenav mode="push" [ngStyle]="{ width:'250px' }">
+    <mat-toolbar color="warn">
+      <span>Menú</span>
+      <span class="spacer"></span>
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </mat-toolbar>
+
+    <mat-nav-list>
+      <!--* Aremos un ng for de la sidebar list items y usaremos el metodo unico de list item para que nos redirija -->
+      <!--* i.url es pata obtener la url -->
+      <mat-list-item *ngFor="let i of sidebarItems" [routerLink]="i.url" (click)="sidenav.toggle()">
+        <!--* i.icon es para obtener el icono y usamos mat-icon para que nos dibuje el icono -->
+        <mat-icon matListItemIcon>{{i.icon}}</mat-icon>
+
+        <!--* i.label es para obtener el label que hemos puesto y usaremos la etiqueta label pata hacer diferentes labesl y no se nos rejunte todo -->
+        <mat-label>{{i.label}}</mat-label>
+      </mat-list-item>
+    </mat-nav-list>
+
+  </mat-sidenav>
+
+  <mat-toolbar color="primary">
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span class="spacer"></span>
+    <button mat-button>
+      Logout
+    </button>
+  </mat-toolbar>
+
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+
+</mat-sidenav-container>
+
+
