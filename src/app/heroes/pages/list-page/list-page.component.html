@@ -1,5 +1,9 @@
-<ul>
-  <li>Hero1</li>
-  <li>Hero2</li>
-  <li>Hero3</li>
+<!-- async se encarga de auto subscribirse a el observable o promise  -->
+<ul *ngFor="let i of heroes$|async">
+  <li>{{i.characters}}</li> <!-- i.charactes hace referencia al campo del nombre del heroe-->
 </ul>
+
+<!-- Otra forma de hacerlo con el onit aun qie te tienes que subscribir manualmente -->
+<!-- <ul *ngFor="let i of heros">
+  <li>{{i}}</li>
+</ul> -->
