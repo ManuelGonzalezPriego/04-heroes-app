@@ -3,7 +3,7 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-/** Utiliza todo el espacio que tenga disponible */
+/** Utiliza todo el espacio que tenga disponible en el menu desplegable */
 .spacer{
   flex: 1 1 auto;
 }

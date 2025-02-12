@@ -7,5 +7,11 @@ import { Component } from '@angular/core';
   ]
 })
 export class ListPageComponent {
+  // Variable para almacenar el listado de heroes
 
+  //Inyectarl servicio
+
+  ngOnInit():void{
+
+  }
 }
