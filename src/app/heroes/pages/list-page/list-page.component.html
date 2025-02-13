@@ -1,7 +1,13 @@
-<!-- async se encarga de auto subscribirse a el observable o promise  -->
-<ul *ngFor="let i of heroes$|async">
-  <li>{{i.characters}}</li> <!-- i.charactes hace referencia al campo del nombre del heroe-->
-</ul>
+<h1>Liata de Héroes</h1>
+<mat-divider></mat-divider>
+
+<div class="grid mb-8">
+  <!-- async se encarga de auto subscribirse a el observable o promise  -->
+  <div *ngFor="let i of heroes$|async"
+    class="col-12 sm:col-4 md:col-3 xl:col-2">
+    <heroes-hero-card [hero]="i"></heroes-hero-card>
+  </div>
+</div>
 
 <!-- Otra forma de hacerlo con el onit aun qie te tienes que subscribir manualmente -->
 <!-- <ul *ngFor="let i of heros">
