@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, Observable, of } from 'rxjs';
 import { Hero } from '../interface/hero.interface';
 import { environments } from 'src/environments/environments';
 
@@ -14,5 +14,10 @@ export class HeroesService {
   //Este get obtendra la información de nuestr api y le dara el formateo de la interfaz hero
   getHeroes():Observable<Hero[]>{
     return this.http.get<Hero[]>(this.baseUrl+"/heroes");//Cogeremos nuestra base url y le añadiremos /heroes para acceder a la info de heroes
+  }
+
+  getHeroById(id:string):Observable<Hero|undefined>{
+    return this.http.get<Hero>(`${ this.baseUrl }/heroes/${ id}`).
+      pipe( catchError( error => of (undefined)));//Cogeremos nuestra base url y le añadiremos /heroes para acceder a la info de heroes
   }
 }
