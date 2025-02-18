@@ -20,4 +20,6 @@ export class HeroesService {
     return this.http.get<Hero>(`${ this.baseUrl }/heroes/${ id}`).
       pipe( catchError( error => of (undefined)));//Cogeremos nuestra base url y le añadiremos /heroes para acceder a la info de heroes
   }
+
+
 }

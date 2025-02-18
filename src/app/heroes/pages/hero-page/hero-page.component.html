@@ -32,7 +32,8 @@
         <mat-list-item>{{ hero.alter_ego }}</mat-list-item>
       </mat-list>
 
-      <!-- TODO Crear boton para volver al sitado -->
+      <!--* Crearemos un boton que al hacer clic llamara a la función antes creada para volver al listado de heroes -->
+      <button mat-icon-button (click)="returnList()" color="primary"> <mat-icon>subdirectory_arrow_left</mat-icon></button>
     </mat-card-content>
   </mat-card>
 </div>

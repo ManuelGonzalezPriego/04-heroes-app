@@ -35,4 +35,9 @@ public hero?:Hero
 
   }
 
+  //* Crearemos un metodo llamado return list que hara useo de nuestro router para navegar a heroes/list
+  returnList():void{
+    this.router.navigate(['heroes/list']);
+  }
+
 }
