@@ -9,13 +9,14 @@
   <div class="col-12 sm:col-6">
     <mat-card>
       <mat-card-content>
-        <div class="grid">
+        <form class="grid" [formGroup]="heroForm" (ngSubmit)="onSubmit()">
           <mat-form-field class="col-12 sm:col-6">
             <mat-label>Super héroe</mat-label>
             <input
               type="text"
               matInput
               required
+              formControlName="superhero"
             />
           </mat-form-field>
           <mat-form-field class="col-12 sm:col-6">
@@ -24,6 +25,7 @@
               type="text"
               matInput
               required
+              formControlName="alter_ego"
             />
           </mat-form-field>
           <mat-form-field class="col-12">
@@ -32,6 +34,7 @@
               type="text"
               matInput
               required
+              formControlName="first_appearance"
             />
           </mat-form-field>
           <mat-form-field class="col-12">
@@ -40,29 +43,42 @@
               type="text"
               matInput
               required
+              formControlName="characters"
             />
           </mat-form-field>
           <mat-form-field class="col-12">
             <mat-label>Creador</mat-label>
-            <mat-select required>
+            <mat-select
+              required
+              formControlName="publisher"
+              >
               <mat-option *ngFor="let publisher of publishers" value="{{publisher.id}}">
                 {{publisher.desc}}
               </mat-option>
             </mat-select>
           </mat-form-field>
+          <mat-form-field class="col-12">
+            <mat-label>Imagen alternativa</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="alt_img"
+            />
+          </mat-form-field>
+          <div class="flex justify-content-between w-full">
+            <button mat-flat-button color="warn">Borrar</button>
+            <button mat-flat-button color="primary">Guardar</button>
+          </div>
 
-        </div>
-        <div class="flex justify-content-between">
-          <button mat-flat-button color="warn">Borrar</button>
-          <button mat-flat-button color="primary">Guardar</button>
-        </div>
+        </form>
       </mat-card-content>
+
     </mat-card>
   </div>
 
   <div class="col-12 sm:col-6">
     <mat-card>
-      <img src="" alt="Imagen del héroe" mat-card-image>
+      <img src=" " alt="Imagen del héroe" mat-card-image>
     </mat-card>
   </div>
 
