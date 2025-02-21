@@ -1,6 +1,6 @@
 <h1>
   Editar / Añadir héroes
-  <small>Superman</small>
+  <small *ngIf="this.hero!=null">{{this.hero.superhero}}</small>
 </h1>
 
 <mat-divider class="mb-2"></mat-divider>
