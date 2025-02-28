@@ -1,7 +1,8 @@
 <h1>
-  Editar / Añadir héroes
-  <!-- Si el heroe no es nulo mostramos su nombre -->
-  <small *ngIf="this.hero!=null">{{this.hero.superhero}}</small>
+  <!-- De esta forma podemos saver si vamos a Editar o Añadir héroe fácilmente: -->
+  {{ currentHero.id? 'Editar' : 'Añadir'}}
+  <!-- Indicamos los datos del héroe que estamos editando: -->
+  <small *ngIf="currentHero.id">{{currentHero.superhero}}</small>
 </h1>
 
 <mat-divider class="mb-2"></mat-divider>
@@ -67,7 +68,9 @@
             />
           </mat-form-field>
           <div class="flex justify-content-between w-full">
-            <button mat-flat-button color="warn">Borrar</button>
+            <!-- Ahora vamos a ocultar el botón de Borrar si es un nuevo héroe. -->
+            <button *ngIf="this.currentHero.id" mat-flat-button color="warn">Borrar</button>
+            <!-- Ahora vamos a ocultar el botón de Guardar hasta que los datos sehan correctos. -->
             <button *ngIf="this.heroForm.valid" mat-flat-button color="primary">Guardar</button>
           </div>
 

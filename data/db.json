@@ -13,7 +13,8 @@
       "publisher": "DC Comics",
       "alter_ego": "Bruce Wayne",
       "first_appearance": "Detective Comics #27",
-      "characters": "Bruce Wayne"
+      "characters": "Bruce Wayne",
+      "alt_img": null
     },
     {
       "id": "dc-superman",
@@ -181,7 +182,7 @@
       "publisher": "DC Comics",
       "alter_ego": "Kasane Teto",
       "first_appearance": "2channel",
-      "characters": "Kasane, Teto",
+      "characters": "Kasane, Teto, Pear",
       "alt_img": "https://preview.redd.it/petition-to-make-the-subreddit-pfp-teto-pear-v0-1v6bzd0b4jnd1.jpeg?auto=webp&s=95ea3dfeadecc79d19d16c6026a6a085385a6d93"
     }
   ]

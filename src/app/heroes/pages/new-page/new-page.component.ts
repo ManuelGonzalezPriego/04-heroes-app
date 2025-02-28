@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Hero, Publisher } from '../../interface/hero.interface';
 import { HeroesService } from '../../services/heroes.service';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-new-page',
@@ -31,7 +31,14 @@ export class NewPageComponent {
   public hero:Hero=null!;
 
   // Importamos tato heroes service como route
-  constructor(private heroesService:HeroesService, public router:Router){}
+  constructor(
+    private heroesService:HeroesService,
+    private activatedRoute:ActivatedRoute,
+    private router:Router,
+    //* Proporciona información sobre una operación con un mensaje de una sola línea, que puede incluir una acción.
+    //* El mensaje de Snackbar aparece por encima de todos los demás elementos y se coloca en la parte inferior central de la pantalla.
+    private snackBar:MatSnackBar
+  ){}
 
   // Esto nos pasa la info de heroForm a la interfaz Hero y si esta bien nos lo creará
   get currentHero():Hero{
@@ -46,7 +53,7 @@ export class NewPageComponent {
     if(this.currentHero.id){
       this.heroesService.updateHero(this.currentHero)
       .subscribe(hero=>{
-        // TODO: Mostrar snackbar
+        this.showSnackBar(`${this.hero.superhero} is updated!`)
       });
       return
     }
@@ -55,6 +62,8 @@ export class NewPageComponent {
     this.heroesService.addHero(this.currentHero)
       .subscribe(hero=>{
         // TODO: Mostrar snackbar y navegar a /hero/edit/hero.id
+        this.showSnackBar(`${this.hero.superhero} is created!`)
+
       });
   }
 
@@ -87,5 +96,13 @@ export class NewPageComponent {
         ... this.hero
       });
     });
+  }
+
+  //* Este metodo privado mostrará la información de el SnackBar, en este caso el boton de confirmación de lectura sera un ok y durara 2500 milisegundos
+  private showSnackBar(message:string):void{
+    // El mensage de la snackbar es el mensage pasado por parametro y el boton para confirmar es el que le indicamos despues de la coma
+    this.snackBar.open(message, 'ok',{
+      duration:2500,
+    })
   }
 }
