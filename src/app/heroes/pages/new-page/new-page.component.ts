@@ -59,7 +59,7 @@ export class NewPageComponent {
     if(this.currentHero.id){
       this.heroesService.updateHero(this.currentHero)
       .subscribe(hero=>{
-        this.showSnackBar(`${this.hero.superhero} is updated!`)
+        this.showSnackBar(`${this.currentHero.superhero} is updated!`)
       });
       return
     }
@@ -68,7 +68,7 @@ export class NewPageComponent {
     this.heroesService.addHero(this.currentHero)
       .subscribe(hero=>{
         // TODO: Mostrar snackbar y navegar a /hero/edit/hero.id
-        this.showSnackBar(`${this.hero.superhero} is created!`)
+        this.showSnackBar(`${this.currentHero.superhero} is created!`)
 
       });
   }
@@ -110,6 +110,10 @@ export class NewPageComponent {
     this.snackBar.open(message, 'ok',{
       duration:2500,
     })
+
+    // Ponemos esto asi para que cadavez que se valla a mostra una snack bar vuelva al listado, esto lo hacemos así por que cadavez que se ponga una snack
+    // Significa que se ha realizado una acción en la web, asi nos aorramos codigo
+    this.router.navigate(['/']);
   }
 
   //* Haciendo uso de este metodo eliminaremos el heroe y mostraremos el dialogo pertinente
@@ -123,7 +127,12 @@ export class NewPageComponent {
     });
 
     dialogRef.afterClosed().subscribe(result=>{
-      console.log('Deleted');
+      // Si el resultado del dialogo es true se ejecutara el codigo que borrara al hero, mostrando su mensaje correspondiente y regresando al listado
+      if(!result) return;
+      this.heroesService.deleteHeroById(this.currentHero.id)
+      .subscribe(hero=>{
+        this.showSnackBar(`${this.hero.superhero} is deleted!`)
+      });
     });
   }
 }

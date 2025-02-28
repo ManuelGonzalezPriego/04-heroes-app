@@ -36,11 +36,15 @@ export class HeroesService {
     return this.http.patch<Hero>(`${this.baseUrl}/heroes/${hero.id}`,hero);
   }
 
-  // Actualizar un heroe
-  deleteHero(id:string):Observable<boolean>{
-    return this.http.delete(`${this.baseUrl}/heroes/${id}`)
-      .pipe(map(response=>true),catchError(error=>of(false))
-      );
+  // Elimina un heroe por su id y devulve un observabel que va a ser el que nos indique si se borro o no,
+  // esto es devido a que usamos el hero pipe imege (Actualizamos el metodo con los pipe para poder que al subscribirnos en new-page pongamos el
+  // mensage directamente)
+  deleteHeroById(id: string): Observable<boolean> {
+    return this.http.delete(`${ this.baseUrl }/heroes/${ id }`)
+    .pipe(
+      map( response => true ),
+      catchError( error => of(false) )
+    )
   }
 
 }
