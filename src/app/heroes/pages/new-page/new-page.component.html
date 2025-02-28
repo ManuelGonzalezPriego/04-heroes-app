@@ -67,14 +67,17 @@
               formControlName="alt_img"
             />
           </mat-form-field>
-          <div class="flex justify-content-between w-full">
-            <!-- Ahora vamos a ocultar el botón de Borrar si es un nuevo héroe. -->
-            <button *ngIf="this.currentHero.id" mat-flat-button color="warn">Borrar</button>
-            <!-- Ahora vamos a ocultar el botón de Guardar hasta que los datos sehan correctos. -->
-            <button *ngIf="this.heroForm.valid" mat-flat-button color="primary">Guardar</button>
-          </div>
-
         </form>
+        <div class="flex justify-content-between">
+          <!-- Ahora vamos a ocultar el botón de Borrar si es un nuevo héroe. -->
+          <button
+          *ngIf="this.currentHero.id"
+          mat-flat-button color="warn"
+          (click)="onDeleteHero()">Borrar</button>
+          <span></span>
+          <!-- Ahora vamos a ocultar el botón de Guardar hasta que los datos sehan correctos. -->
+          <button *ngIf="this.heroForm.valid" mat-flat-button color="primary" (click)="onSubmit()">Guardar</button>
+        </div>
       </mat-card-content>
 
     </mat-card>

@@ -4,6 +4,8 @@ import { Hero, Publisher } from '../../interface/hero.interface';
 import { HeroesService } from '../../services/heroes.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-new-page',
@@ -37,7 +39,11 @@ export class NewPageComponent {
     private router:Router,
     //* Proporciona información sobre una operación con un mensaje de una sola línea, que puede incluir una acción.
     //* El mensaje de Snackbar aparece por encima de todos los demás elementos y se coloca en la parte inferior central de la pantalla.
-    private snackBar:MatSnackBar
+    private snackBar:MatSnackBar,
+
+    //* Antes de realizar la eliminación de un héroe, es interesante lanzar un diálogo de confirmación de eliminación.
+    //* Para ello vamos a utilizar Material Dialog
+    private dialog:MatDialog
   ){}
 
   // Esto nos pasa la info de heroForm a la interfaz Hero y si esta bien nos lo creará
@@ -104,5 +110,20 @@ export class NewPageComponent {
     this.snackBar.open(message, 'ok',{
       duration:2500,
     })
+  }
+
+  //* Haciendo uso de este metodo eliminaremos el heroe y mostraremos el dialogo pertinente
+  public onDeleteHero(){
+    if(!this.currentHero.id) throw Error("Hero id is required...");
+
+    // Para esto tendremos que crear un conponente con ng g c heroes/components/confirmDialog --inline-style --skip-tests
+    // Y ahora sí que podemos llamar a nuestro ConfirmDialogComponent:
+    const dialogRef=this.dialog.open(ConfirmDialogComponent, {
+      data:this.heroForm.value,
+    });
+
+    dialogRef.afterClosed().subscribe(result=>{
+      console.log('Deleted');
+    });
   }
 }
