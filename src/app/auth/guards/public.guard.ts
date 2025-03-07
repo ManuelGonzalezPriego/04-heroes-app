@@ -7,32 +7,15 @@ const checkAuthStatus=():Observable<boolean>=>{
   const authService:AuthService=inject(AuthService);
   const router:Router=inject(Router);
 
-  return authService.checkAuthentication().pipe(
+  return authService.checkAuthentication()
+    .pipe(
       tap(isAutheticated=>console.log('Aunthenticated',isAutheticated)),
       tap(isAutheticated=>{
-        if(!isAutheticated){
-          router.navigate(['/auth/login'])
+        if(isAutheticated){
+          router.navigate(['/'])
         }
       })
     )
 }
 
-export const canMatchGuard=( // Tipado CanMatchFN
-  route:Route,
-  segments:UrlSegment[]
-)=>{
-  console.log('CanMatch');
-  console.log({route,segments})
 
-  return true
-};
-
-export const canActivateGuard=(
-  route:ActivatedRouteSnapshot,
-  state:RouterStateSnapshot
-)=>{
-  console.log('CanActivate');
-  console.log({route,state})
-
-  return true
-};
