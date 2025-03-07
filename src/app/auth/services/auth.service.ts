@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environments } from 'src/environments/environments';
 import { User } from '../interfaces/User';
-import { Observable, tap } from 'rxjs';
+import { catchError, map, Observable, of, tap } from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
@@ -42,5 +42,20 @@ export class AuthService {
   logout(){
     this.user=undefined;
     localStorage.clear(); // Elimina cualquier cosas que haya
+  }
+
+  checkAuthentication(): Observable<boolean>|boolean{
+    if(!localStorage.getItem('token')) return false; // no necesitamos operaciones asincronas
+
+    const token=localStorage.getItem('token');
+
+    return this.http.get<User>(`${this.baseUrl}/users/1`)
+      .pipe(
+        tap(user=>this.user=user), // tap: efecto secundario para almacenar el usuario
+        map(user=>!!user), // map: transforma la salida, hacemos doble negación, negamos y negamos
+                           // Basicamente devolvemos true si hay un usrio
+                           // Es lo mismo que poner map (user=>user?true:false)
+        catchError(err=>of(false)) // Y si el backend devuelve error, es falso
+      )
   }
 }
