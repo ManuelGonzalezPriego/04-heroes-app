@@ -44,8 +44,8 @@ export class AuthService {
     localStorage.clear(); // Elimina cualquier cosas que haya
   }
 
-  checkAuthentication(): Observable<boolean>|boolean{
-    if(!localStorage.getItem('token')) return false; // no necesitamos operaciones asincronas
+  checkAuthentication(): Observable<boolean>{
+    if(!localStorage.getItem('token')) return of(false); // no necesitamos operaciones asincronas
 
     const token=localStorage.getItem('token');
 
